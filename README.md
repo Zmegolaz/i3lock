@@ -1,4 +1,4 @@
-i3lock - improved screen locker
+i3lock - improved screen locker, XP bars style
 ===============================
 [i3lock](https://i3wm.org/i3lock/)> is a simple screen locker like slock.
 After starting it, you will see a white screen (you can configure the
@@ -24,6 +24,12 @@ Install
 -------
 
 See [the i3lock home page](https://i3wm.org/i3lock/).
+
+XP style changes
+------------
+This fork of i3lock draws some XP style blocks when typing, and assumes you
+set an XP image as background to match the bars. At the moment it has to be
+1920x1080 px to align properly.
 
 Requirements
 ------------
