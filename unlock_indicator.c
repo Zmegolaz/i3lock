@@ -107,14 +107,22 @@ xcb_pixmap_t draw_image(uint32_t *resolution) {
 
     if (img) {
         if (!tile) {
+            int imgw = cairo_image_surface_get_width(img);
+            int imgh = cairo_image_surface_get_height(img);
             if (xr_screens > 0) {
                 /* Each screen should have it's own background. */
                 for (int screen = 0; screen < xr_screens; screen++) {
-                    cairo_set_source_surface(xcb_ctx, img, (double)xr_resolutions[screen].x + (xr_resolutions[screen].width - 1920) / 2, (double)xr_resolutions[screen].y + (xr_resolutions[screen].height - 1080) / 2);
+                    cairo_set_source_surface(xcb_ctx,
+                                             img,
+                                             (double)xr_resolutions[screen].x + (xr_resolutions[screen].width - imgw) / 2,
+                                             (double)xr_resolutions[screen].y + (xr_resolutions[screen].height - imgh) / 2);
                     cairo_paint(xcb_ctx);
                 }
             } else {
-                cairo_set_source_surface(xcb_ctx, img, ((double)resolution[0] - 1920) / 2, ((double)resolution[1] - 1080) / 2);
+                cairo_set_source_surface(xcb_ctx,
+                                         img,
+                                         ((double)resolution[0] - imgw) / 2,
+                                         ((double)resolution[1] - imgh) / 2);
                 cairo_paint(xcb_ctx);
             }
         } else {
@@ -277,8 +285,9 @@ xcb_pixmap_t draw_image(uint32_t *resolution) {
     if (xr_screens > 0) {
         /* Composite the unlock indicator in the middle of each screen. */
         for (int screen = 0; screen < xr_screens; screen++) {
-            int barx = ((double)xr_resolutions[screen].x + (xr_resolutions[screen].width - 1920) / 2) + 815;
-            int bary = ((double)xr_resolutions[screen].y + (xr_resolutions[screen].height - 1080) / 2) + 771;
+            int barx = ((double)xr_resolutions[screen].x + xr_resolutions[screen].width) / 2 - 145;
+            int bary = ((double)xr_resolutions[screen].y + xr_resolutions[screen].height) / 2 + 231;
+            DEBUG("barx: %d, bary: %d\n", barx, bary);
             cairo_set_source_surface(xcb_ctx, baroutput, barx, bary);
             cairo_rectangle(xcb_ctx, barx, bary, BAR_WIDTH, BAR_HEIGHT);
             cairo_fill(xcb_ctx);
@@ -290,8 +299,8 @@ xcb_pixmap_t draw_image(uint32_t *resolution) {
         /* We have no information about the screen sizes/positions, so we just
          * place the unlock indicator in the middle of the X root window and
          * hope for the best. */
-        int barx = ((double)resolution[0] - 1920) / 2 + 815;
-        int bary = ((double)resolution[1] - 1080) / 2 + 771;
+        int barx = (double)resolution[0] / 2 - 145;
+        int bary = (double)resolution[1] / 2 + 231;
         cairo_set_source_surface(xcb_ctx, baroutput, barx, bary);
         cairo_rectangle(xcb_ctx, barx, bary, BAR_WIDTH, BAR_HEIGHT);
         cairo_fill(xcb_ctx);
