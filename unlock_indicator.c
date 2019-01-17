@@ -291,8 +291,8 @@ xcb_pixmap_t draw_image(uint32_t *resolution) {
             cairo_set_source_surface(xcb_ctx, baroutput, barx, bary);
             cairo_rectangle(xcb_ctx, barx, bary, BAR_WIDTH, BAR_HEIGHT);
             cairo_fill(xcb_ctx);
-            cairo_set_source_surface(xcb_ctx, textoutput, barx, bary + 100);
-            cairo_rectangle(xcb_ctx, barx, bary + 100, BAR_WIDTH, TEXT_HEIGHT);
+            cairo_set_source_surface(xcb_ctx, textoutput, barx, bary - 137);
+            cairo_rectangle(xcb_ctx, barx, bary - 137, BAR_WIDTH, TEXT_HEIGHT);
             cairo_fill(xcb_ctx);
         }
     } else {
