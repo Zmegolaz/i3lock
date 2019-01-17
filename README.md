@@ -29,7 +29,8 @@ XP bar style changes
 ------------
 This fork of i3lock draws some XP style progress bar blocks when typing,
 and assumes you set an XP image as background to match the bars.
-Pick one without any bars already on it.
+Download the zip file from here to get one with the correct dimensions:
+https://www.deviantart.com/lucassinxxltech/art/Windows-XP-Boot-Screen-in-1920x1080-765641466
 
 Requirements
 ------------
