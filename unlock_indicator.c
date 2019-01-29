@@ -285,8 +285,8 @@ xcb_pixmap_t draw_image(uint32_t *resolution) {
     if (xr_screens > 0) {
         /* Composite the unlock indicator in the middle of each screen. */
         for (int screen = 0; screen < xr_screens; screen++) {
-            int barx = (double)xr_resolutions[screen].x + (xr_resolutions[screen].width) / 2 - 145;
-            int bary = (double)xr_resolutions[screen].y + (xr_resolutions[screen].height) / 2 + 231;
+            int barx = (double)xr_resolutions[screen].x + xr_resolutions[screen].width / 2 - 145;
+            int bary = (double)xr_resolutions[screen].y + xr_resolutions[screen].height / 2 + 231;
             cairo_set_source_surface(xcb_ctx, baroutput, barx, bary);
             cairo_rectangle(xcb_ctx, barx, bary, BAR_WIDTH, BAR_HEIGHT);
             cairo_fill(xcb_ctx);
